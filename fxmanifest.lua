@@ -16,7 +16,3 @@ exports {
     'setMenuColumnFocus',
     'SetTooltipOnly'
 }
-
-files {
-    --'runtime.png',
-}
