@@ -282,6 +282,7 @@ function LobbyMenuGetSelectedButtonParam()
     return current, buttonText, buttonParams
 end
 
+RegisterNetEvent('lobbymenu:CloseMenu')
 AddEventHandler('lobbymenu:CloseMenu', function()
     if GetCurrentFrontendMenuVersion() == GetHashKey("FE_MENU_VERSION_CORONA") then
         SetFrontendActive(false)
