@@ -44,7 +44,15 @@ RegisterNetEvent('lobby.viewLobbies', function(_buttonParams)
     Blash.Functions.TriggerCallback('lobby:server:getLobbies', function(cb) p:resolve(cb) end)
     local result = Citizen.Await(p)
     for _, v in pairs(result) do
-        TriggerEvent('lobbymenu:AddButton', 'critMenu.ExampleMenu', {text = v.name}, "Join " .. v.name, v.players .. ' Players', false, 0, "lobby.joinLobby")
+        if v.isInLobby then
+            TriggerEvent('lobbymenu:AddButton', 'critMenu.ExampleMenu', "_IsNotSelectable", "(Current) " .. v.name, #v.players .. ' Player(s)', false, 0, "lobby.joinLobby")
+        else
+            if v.joinable then
+                TriggerEvent('lobbymenu:AddButton', 'critMenu.ExampleMenu', {text = v.name}, "Join " .. v.name, #v.players .. ' Player(s)', false, 0, "lobby.joinLobby")
+            else
+                TriggerEvent('lobbymenu:AddButton', 'critMenu.ExampleMenu', "_IsNotSelectable", "Join " .. v.name, #v.players .. ' Player(s)', false, 0, "lobby.joinLobby")
+            end
+        end
     end
 
     TriggerEvent('lobbymenu:AddButton', 'critMenu.ExampleMenu', {text = "Back to Main Menu"}, "Back to Main Menu", "", false, 0, "lobby.backToMainMenu")
@@ -59,5 +67,8 @@ end)
 
 RegisterNetEvent('lobby.joinLobby', function(buttonParams)
     local lobbyName = buttonParams.text
-    TriggerServerEvent('blash-game:server:joinLobby', lobbyName, source)
+    TriggerServerEvent('blash-game:server:joinLobby', lobbyName)
+    TriggerEvent('lobbymenu:ResetButtonList', 'critMenu.ExampleMenu')
+    TriggerEvent('lobbymenu:UpdateMenu', 'critMenu.ExampleMenu')
+    TriggerEvent('lobby.viewLobbies')
 end)
