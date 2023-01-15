@@ -238,7 +238,7 @@ AddEventHandler('lobbymenu:ReloadMenu', function()
             TriggerScreenblurFadeIn(1000) --screen blur
         end
         --updateDetailsScaleform(menuList[openedMenu]['details'], menuList[openedMenu]['rowDetails'])
-        --updateButtonScaleform(menuList[openedMenu]['buttons'])
+        updateButtonScaleform(menuList[openedMenu]['buttons'])
         --updatePlayersScaleform(menuList[openedMenu]['players'], menuList[openedMenu]['details'])
         RestartFrontendMenu("FE_MENU_VERSION_CORONA", -1)
         Citizen.Wait(100)
@@ -327,6 +327,5 @@ RegisterCommand('lobbymenu:usebutton:cmd', function()
     end
 end)
 
-RegisterKeyMapping('lobbymenu:closemenu:cmd', 'Close Frontend Menu', 'keyboard', 'BACK')
 RegisterKeyMapping('lobbymenu:usebutton:cmd', 'Use Frontend Menu Item', 'keyboard', 'RETURN')
 RegisterKeyMapping('lobbymenu:switchcolumn:cmd', 'Switch Frontend Menu Column Focus', 'keyboard', 'Q')
