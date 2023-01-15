@@ -10,9 +10,16 @@ client_scripts {
     'client/cl_lobby_example.lua',
 }
 
+server_script 'server/main.lua'
+shared_script 'config.lua'
+
 exports {
     "LobbyMenuGetActiveMenu",
     "LobbyMenuGetSelectedButtonParam",
     'setMenuColumnFocus',
     'SetTooltipOnly'
+}
+
+dependencies {
+    'blash-game'
 }
